@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Product List</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+   </head>
+   <body>
+     
+     
+      <div class="header-container"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+ 
+   <div class="site-name">GLITZ & GLAMOUR</div>
+   
+   <div class="header-bar">
+      <th:block sec:authorize="isAuthenticated()">
+         Hello
+         <a th:href="@{/admin/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
+         &nbsp;|&nbsp;
+         <a th:href="@{/admin/logout}">Logout</a>
+      </th:block>
+       
+      <th:block sec:authorize="!isAuthenticated()">
+         <!-- <a th:href="@{/admin/login}">Login</a> -->
+      </th:block>
+   </div>
+   
+</div>
+    
+     
+   
+   <div class="menu-container"
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+   <!-- <a th:href="@{/}">Home</a>
+   | -->
+   <a th:href="@{/productList}">
+   Product List
+   </a>
+   |
+   <a th:href="@{/shoppingCart}">
+   My Cart
+   </a>
+   |
+   <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+      <a th:href="@{/admin/orderList}">
+      Order List
+      </a>
+      |
+   </th:block>
+   <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+      <a th:href="@{/admin/product}">
+      Create Product
+      </a>
+      |
+   </th:block>
+</div>
+       
+      <div class="page-title">Order Info</div>
+       
+      <div class="customer-info-container">
+         <h3>Customer Information:</h3>
+         <ul>
+            <li>Name: <span th:utext="${orderInfo.account.userName}"></span></li>
+            <li>Email: <span th:utext="${orderInfo.account.customerEmail}"></span></li>
+            <li>Phone: <span th:utext="${orderInfo.account.customerPhone}"></span></li>
+            <li>Address: <span th:utext="${orderInfo.account.customerAddress}"></span></li>
+         </ul>
+         <h3>Order Summary:</h3>
+         <ul>
+            <li>Total:
+               <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">         
+               </span>
+            </li>
+         </ul>
+      </div>
+      <br/>
+      <table border="1" style="width:100%">
+         <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Amount</th>
+            </tr>
+         <tr th:each="orderDetail : ${orderDetail}">
+          <td th:utext="${orderDetail.product.code}"></td>
+             <td th:utext="${orderDetail.product.name}"></td>
+            <td th:utext="${orderDetail.quanity}"></td>
+            <td th:utext="${orderDetail.price}"></td>
+            <td th:utext="${orderDetail.amount}"></td>
+            </tr>
+      </table>
+       
+             
+   </body>
+</html>
