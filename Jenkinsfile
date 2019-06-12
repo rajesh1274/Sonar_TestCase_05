@@ -20,7 +20,7 @@ pipeline {
     
     stage ('Deploy-To-Tomcat') {
       steps {
-        sh 'cp target/*.war /home/rajesh4debug/prod/apache-tomcat-8.5.42/webapps/webapp.war'
+        sh 'sudo cp target/*.war /home/rajesh4debug/prod/apache-tomcat-8.5.42/webapps/webapp.war'
           
       }       
     }
