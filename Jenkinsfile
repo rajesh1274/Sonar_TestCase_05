@@ -18,10 +18,18 @@ pipeline {
        }
     }
     
+    stage ('Check-Git-Secrets') {
+      steps {
+        sh 'rm trufflehog || true'
+        sh 'docker run gesellix/trufflehog --json https://github.com/rajesh1274/Sonar_TestCase_05.git > trufflehog'
+        sh 'cat trufflehog'
+      }
+    }
+    
     stage ('Deploy-To-Tomcat') {
       steps {
         sh 'pwd'
-        sh 'sudo cp target/*.jar /home/rajesh4debug/prod/apache-tomcat-8.5.42/webapps/webapp.jar'
+        sh 'sudo cp target/*.jar /home/rajesh4debug/prod/apache-tomcat-8.5.42/webapps/Sonar_TestCase_05.jar'
           
       }       
     }
