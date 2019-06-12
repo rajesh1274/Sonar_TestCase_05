@@ -20,8 +20,8 @@ pipeline {
     
     stage ('Deploy-To-Tomcat') {
       steps {
-        sh 'ls -lrt'
-        sh 'cp target/*.jar /home/rajesh4debug/prod/apache-tomcat-8.5.42/webapps/webapp.jar'
+        sh 'pwd'
+        sh 'sudo cp target/*.jar /home/rajesh4debug/prod/apache-tomcat-8.5.42/webapps/webapp.jar'
           
       }       
     }
