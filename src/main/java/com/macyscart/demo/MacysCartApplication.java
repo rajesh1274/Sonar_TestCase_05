@@ -11,6 +11,7 @@ import com.macyscart.demo.service.CartInfoServiceImpl;
 @ComponentScan
 @SpringBootApplication
 public class MacysCartApplication {
+	String name = "Rajesh";
 
 	public static void main(String[] args) {
 		SpringApplication.run(MacysCartApplication.class, args);
