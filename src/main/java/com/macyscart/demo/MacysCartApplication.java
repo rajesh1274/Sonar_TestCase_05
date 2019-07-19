@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.macyscart.demo.service.CartInfoServiceImpl;
 
+
+
+String name = "Rajesh";
+
 @EnableJpaRepositories
 @ComponentScan
 @SpringBootApplication
